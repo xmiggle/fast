@@ -154,6 +154,9 @@ export class Card extends FASTElement {
 // @public
 export const CardTemplate: import("@microsoft/fast-element").ViewTemplate<Card, any>;
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "Carousel" because one of its declarations is marked as @internal
+//
 // @public
 export class Carousel extends Tabs {
     // @internal (undocumented)
@@ -183,10 +186,8 @@ export class Carousel extends Tabs {
     handleFlipperClick(direction: 1 | -1, e: Event): void;
     // (undocumented)
     handleFlipperKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
-    // (undocumented)
+    // @internal (undocumented)
     handleRotationKeyDown: (e: KeyboardEvent) => void;
-    // (undocumented)
-    handleTabsKeypress: (e: KeyboardEvent) => void;
     // @internal (undocumented)
     items: HTMLElement[];
     loop: boolean;
@@ -208,8 +209,6 @@ export class Carousel extends Tabs {
     // @internal (undocumented)
     rotationControlDefault: HTMLElement;
     // @internal (undocumented)
-    rotationControlItem: HTMLElement[];
-    // @internal (undocumented)
     setComponent(): void;
     // @internal (undocumented)
     tablistRef: HTMLElement;
@@ -217,11 +216,11 @@ export class Carousel extends Tabs {
     tabPanelsContainerRef: HTMLElement;
     }
 
-// @public (undocumented)
+// @internal
 export interface Carousel extends ARIAGlobalStatesAndProperties {
 }
 
-// @public (undocumented)
+// @public
 export enum CarouselPattern {
     // (undocumented)
     basic = "basic",
@@ -420,6 +419,9 @@ export const DividerTemplate: import("@microsoft/fast-element").ViewTemplate<Div
 // @public
 export const endTemplate: import("@microsoft/fast-element").ViewTemplate<StartEnd, any>;
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "Flipper" because one of its declarations is marked as @internal
+//
 // @public
 export class Flipper extends FASTElement {
     direction: FlipperDirection;
@@ -427,7 +429,7 @@ export class Flipper extends FASTElement {
     hiddenFromAT: boolean;
 }
 
-// @public (undocumented)
+// @internal
 export interface Flipper extends ARIAGlobalStatesAndProperties {
 }
 

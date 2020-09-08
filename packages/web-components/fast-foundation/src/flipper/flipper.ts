@@ -48,5 +48,12 @@ export class Flipper extends FASTElement {
     @attr
     public direction: FlipperDirection = FlipperDirection.next;
 }
+
+/**
+ * Mark internal because exporting class and interface of the same name
+ * confuses API documenter.
+ * TODO: https://github.com/microsoft/fast/issues/3317
+ * @internal
+ */
 export interface Flipper extends ARIAGlobalStatesAndProperties {}
 applyMixins(Flipper, ARIAGlobalStatesAndProperties);
