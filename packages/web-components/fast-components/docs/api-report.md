@@ -266,7 +266,7 @@ export class FASTButton extends Button {
 export class FASTCard extends Card {
 }
 
-// @public (undocumented)
+// @public
 export class FASTCarousel extends Carousel {
 }
 
