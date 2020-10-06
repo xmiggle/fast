@@ -4,6 +4,7 @@ export * from "./anchor/anchor.definition";
 export * from "./badge/badge.definition";
 export * from "./button/button.definition";
 export * from "./card/card.definition";
+export * from "./carousel/carousel.definition";
 export * from "./checkbox/checkbox.definition";
 export * from "./design-system-provider/design-system-provider.definition";
 export * from "./dialog/dialog.definition";
