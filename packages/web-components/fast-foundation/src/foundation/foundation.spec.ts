@@ -57,6 +57,8 @@ describe("FASTFoundation", () => {
             console.log(element.$fastController.template, template);
             await disconnect();
         });
+
+        xit("the template resolved from $fastProvider when a local template property is not set", async () => {});
     });
 
     describe("should style with", () => {
@@ -78,5 +80,17 @@ describe("FASTFoundation", () => {
             console.log(element.$fastController.styles, styles);
             await disconnect();
         });
+
+        xit("the styles resolved from $fastProvider when a local template property is not set", async () => {});
     });
+
+    it("should resolve a null $fastProvider if no parent FASTProvider exists", async () => {
+        const { element, connect, disconnect } = await setup("bare-element");
+        await connect();
+
+        expect(element.$fastProvider).to.equal(null);
+        await disconnect();
+    });
+
+    xit("should resolve a provider element to $fastProvider after DOM connection if element has a parent FASTProvider", async () => {});
 });

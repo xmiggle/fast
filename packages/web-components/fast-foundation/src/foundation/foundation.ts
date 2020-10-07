@@ -26,7 +26,7 @@ export abstract class FASTFoundation extends FASTElement {
      */
     @observable
     public template: ElementViewTemplate | void | null;
-    private templateChanged(): void {
+    protected templateChanged(): void {
         if (this.template !== undefined) {
             this.$fastController.template = this.template;
         }
@@ -39,7 +39,7 @@ export abstract class FASTFoundation extends FASTElement {
      */
     @observable
     public styles: ElementStyles | void | null;
-    private stylesChanged(): void {
+    protected stylesChanged(): void {
         if (this.styles !== undefined) {
             this.$fastController.styles = this.styles;
         }
@@ -59,7 +59,10 @@ export abstract class FASTFoundation extends FASTElement {
         return this.$fastProvider?.resolveStylesFor(this) || null;
     }
 
-    connectedCallback() {
+    /**
+     * Invoked when element is connected to the DOM.
+     */
+    public connectedCallback() {
         this.$fastProvider = FASTProvider.resolveProvider(this);
         super.connectedCallback();
     }
