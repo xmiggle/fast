@@ -8,9 +8,6 @@ interface ResolveProviderEventDetail {
     fastProvider: FASTProvider | null;
 }
 
-/**
- * The event name for resolving a FASTProvider
- */
 export class FASTProvider extends FASTElement {
     /**
      * The nearest parent provider element, or null if no parent FASTProvider exists.
