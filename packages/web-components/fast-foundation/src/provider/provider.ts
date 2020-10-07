@@ -1,25 +1,30 @@
 import { ElementStyles, ElementViewTemplate, FASTElement } from "@microsoft/fast-element";
 
 /**
- * Provider
+ * Event detail object used while resolving the nearest FASTProvider
+ * for an element.
  */
-export interface FASTProvider {
-    resolveTemplateFor(el: FASTElement): ElementViewTemplate | null;
-    resolveStylesFor(el: FASTElement): ElementStyles | null;
+interface ResolveProviderEventDetail {
+    fastProvider: FASTProvider | null;
 }
 
 /**
  * The event name for resolving a FASTProvider
  */
 export class FASTProvider extends FASTElement {
-    private static readonly resolveProviderEventName = "resolve-fast-provider";
+    /**
+     * The nearest parent provider element, or null if no parent FASTProvider exists.
+     */
+    public get parentProvider(): FASTProvider | null {
+        return this._parentProvider;
+    }
 
     /**
      * Resolves the nearest FASTProvider ancestor for an element, or null if no FASTProvider ancestor exists.
      * @param el The element for which to resolve a FASTProvider
      */
     public static resolveProvider(el: FASTElement & HTMLElement): FASTProvider | null {
-        const event = new CustomEvent<{ fastProvider: FASTProvider | null }>(
+        const event = new CustomEvent<ResolveProviderEventDetail>(
             FASTProvider.resolveProviderEventName,
             { detail: { fastProvider: null } }
         );
@@ -45,16 +50,23 @@ export class FASTProvider extends FASTElement {
     }
 
     /**
-     * The nearest parent provider element, or null if no parent FASTProvider exists.
+     * Event name for resolving FASTProvider.
      */
-    public get parentProvider(): FASTProvider | null {
-        return this._parentProvider;
-    }
+    private static readonly resolveProviderEventName = "resolve-fast-provider";
 
     /**
      * Private storage for parent FASTProvider.
      */
     private _parentProvider: FASTProvider | null = null;
+
+    /**
+     * Event handler for resolving a FASTProvider.
+     * @param e The resolve provider event object
+     */
+    private resolveProviderHandler(e: CustomEvent<ResolveProviderEventDetail>): void {
+        e.stopImmediatePropagation();
+        e.detail.fastProvider = this;
+    }
 
     /**
      * Invoked when element is connected to the DOM.
@@ -74,14 +86,5 @@ export class FASTProvider extends FASTElement {
             FASTProvider.resolveProviderEventName,
             this.resolveProviderHandler
         );
-    }
-
-    /**
-     * Event handler for resolving a FASTProvider.
-     * @param e The resolve provider event object
-     */
-    private resolveProviderHandler(e: CustomEvent<{ fastProvider: FASTProvider }>): void {
-        e.stopImmediatePropagation();
-        e.detail.fastProvider = this;
     }
 }
