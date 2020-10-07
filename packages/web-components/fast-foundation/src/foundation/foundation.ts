@@ -15,9 +15,10 @@ import { FASTProvider } from "../provider";
 export abstract class FASTFoundation extends FASTElement {
     /**
      * The element's FASTProvider (if it exists)
-     * TODO: can this be readonly somehow?
      */
-    public $fastProvider: FASTProvider | null;
+    public get $fastProvider(): FASTProvider | null {
+        return this._$fastProvider;
+    }
 
     /**
      * Sets the template of the element instance. When undefined,
@@ -60,10 +61,15 @@ export abstract class FASTFoundation extends FASTElement {
     }
 
     /**
+     * Private storage for $fastProvider.
+     */
+    private _$fastProvider: FASTProvider | null = null;
+
+    /**
      * Invoked when element is connected to the DOM.
      */
     public connectedCallback() {
-        this.$fastProvider = FASTProvider.resolveProvider(this);
+        this._$fastProvider = FASTProvider.resolveProvider(this);
         super.connectedCallback();
     }
 }
