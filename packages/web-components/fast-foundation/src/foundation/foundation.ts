@@ -69,7 +69,7 @@ export abstract class FASTFoundation extends FASTElement {
      * Invoked when element is connected to the DOM.
      */
     public connectedCallback() {
-        this._$fastProvider = FASTProvider.resolveProvider(this);
+        this._$fastProvider = FASTProvider.resolveProviderFor(this);
         super.connectedCallback();
     }
 }
