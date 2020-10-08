@@ -54,7 +54,6 @@ describe("FASTFoundation", () => {
             await connect();
 
             expect(element.$fastController.template).to.equal(template);
-            console.log(element.$fastController.template, template);
             await disconnect();
         });
 
@@ -77,7 +76,6 @@ describe("FASTFoundation", () => {
             await connect();
 
             expect(element.$fastController.styles).to.equal(styles);
-            console.log(element.$fastController.styles, styles);
             await disconnect();
         });
 
