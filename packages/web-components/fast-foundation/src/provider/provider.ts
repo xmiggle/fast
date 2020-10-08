@@ -20,7 +20,7 @@ export class FASTProvider extends FASTElement {
      * Resolves the nearest FASTProvider ancestor for an element, or null if no FASTProvider ancestor exists.
      * @param el The element for which to resolve a FASTProvider
      */
-    public static resolveProviderFor(el: EventTarget): FASTProvider | null {
+    public static resolveProviderFor(el: Element): FASTProvider | null {
         const event = new CustomEvent<ResolveProviderEventDetail>(
             FASTProvider.resolveProviderEventName,
             { detail: { fastProvider: null }, bubbles: true, composed: true }
