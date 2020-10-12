@@ -90,7 +90,8 @@ export class FASTConfiguration implements Configuration {
     }
 
     /**
-     * TODO: Can we make this static somehow?
+     * Builds a component registration object to be registered to a {@link Configuration}
+     * @param defaultElementConfiguration
      */
     public static forComponent(defaultElementConfiguration: ComponentConfiguration) {
         return (
