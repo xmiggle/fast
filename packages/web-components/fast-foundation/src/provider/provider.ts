@@ -1,4 +1,5 @@
 import { ElementStyles, ElementViewTemplate, FASTElement } from "@microsoft/fast-element";
+import { Configuration } from "../configuration/configuration";
 
 /**
  * Event detail object used while resolving the nearest FASTProvider
@@ -8,18 +9,40 @@ interface ResolveProviderEventDetail {
     fastProvider: FASTProvider | null;
 }
 
-export class FASTProvider extends FASTElement {
+export interface Provider extends FASTElement {
+    /**
+     * The configuration object the Provider should use
+     */
+    readonly configuration: Configuration;
+
     /**
      * The nearest parent provider element, or null if no parent FASTProvider exists.
      */
+    readonly parentProvider: FASTProvider | null;
+
+    /**
+     * Resolves a template for an element instance.
+     * @param el The element instance to resolve a template for.
+     */
+    resolveTemplateFor(el: FASTElement): ElementViewTemplate | null;
+
+    /**
+     * Resolves styles for an element instance.
+     * @param el The element instance to resolve styles for.
+     */
+    resolveStylesFor(el: FASTElement): ElementStyles | null;
+}
+
+export abstract class FASTProvider extends FASTElement implements Provider {
+    /** {@inheritdoc Provider.configuration} */
+    abstract readonly configuration: Configuration;
+
+    /** {@implements Provider.parentProvider} */
     public get parentProvider(): FASTProvider | null {
         return this._parentProvider;
     }
 
-    /**
-     * Resolves the nearest FASTProvider ancestor for an element, or null if no FASTProvider ancestor exists.
-     * @param el The element for which to resolve a FASTProvider
-     */
+    /** {@inheritdoc Provider.resolveTemplateFor} */
     public static resolveProviderFor(el: Element): FASTProvider | null {
         const event = new CustomEvent<ResolveProviderEventDetail>(
             FASTProvider.resolveProviderEventName,
@@ -30,18 +53,12 @@ export class FASTProvider extends FASTElement {
         return event.detail.fastProvider;
     }
 
-    /**
-     * Resolves a template for an element instance.
-     * @param el The element instance to resolve a template for.
-     */
+    /** {@inheritdoc Provider.resolveTemplateFor} */
     public resolveTemplateFor(el: FASTElement): ElementViewTemplate | null {
         return null;
     }
 
-    /**
-     * Resolves styles for an element instance.
-     * @param el The element instance to resolve styles for.
-     */
+    /** {@inheritdoc Provider.resolveStylesFor} */
     public resolveStylesFor(el: FASTElement): ElementStyles | null {
         return null;
     }
